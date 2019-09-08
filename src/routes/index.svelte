@@ -19,18 +19,38 @@ Leberkas pork filet mignon pork chop, swine t-bone rump turducken. Strip steak f
 Jowl meatloaf swine, kielbasa leberkas biltong venison brisket pork loin fatback buffalo beef beef ribs turducken. Shankle burgdoggen sirloin, frankfurter ham hock pork chop capicola short loin pork chicken ground round pastrami tongue tenderloin jerky. Tenderloin t-bone tongue, shankle rump chicken porchetta pig kevin. Picanha pork loin filet mignon, jowl short loin alcatra boudin cupim bresaola t-bone meatloaf shank shoulder. Shoulder sirloin chicken t-bone porchetta shank ball tip frankfurter. Spare ribs burgdoggen porchetta tenderloin flank jowl.</p>
 
 <textarea name="text-area" cols="50" rows="10"></textarea>
-<button class="primary">BUTTON</button>
-<button class="secondary">BUTTON</button>
+<button class="primary">
+	<span>BUTTON</span>
+</button>
+<button class="secondary">
+	<span>BUTTON</span>
+</button>
 
-<button class="primary error">BUTTON</button>
-<button class="primary warning">BUTTON</button>
-<button class="primary success">BUTTON</button>
-<button class="primary success disabled">BUTTON</button>
+<button class="primary error">
+	<span>BUTTON</span>
+</button>
+<button class="primary warning">
+	<span>BUTTON</span>
+</button>
+<button class="primary success">
+	<span>BUTTON</span>
+</button>
+<button class="primary success disabled">
+	<span>BUTTON</span>
+</button>
 
-<button class="secondary error">BUTTON</button>
-<button class="secondary warning">BUTTON</button>
-<button class="secondary success">BUTTON</button>
-<button class="secondary success disabled">BUTTON</button>
+<button class="secondary error">
+	<span>BUTTON</span>
+</button>
+<button class="secondary warning">
+	<span>BUTTON</span>
+</button>
+<button class="secondary success">
+	<span>BUTTON</span>
+</button>
+<button class="secondary success disabled">
+	<span>BUTTON</span>
+</button>
 
 
 <figure>

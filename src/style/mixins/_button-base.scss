@@ -1,14 +1,23 @@
-@mixin button-base($color) {
+@mixin button-base($color:none , $padding: none, $light-text:$white, $dark-text:$black, $threshold: 0.7) {
     background-color: $color;
-    border-color: darken($color, 20%);
+    border-color: darken($color, 10%);
+    padding: $padding;
     /* luminance(#{$color}): #{luminance($color)}
      * luminance(white): #{luminance(white)}
      */
-    @if abs(luminance($color) - $white_luminance) > 0.7 {
-    // @if lightness($color) < 70 {
-        color: white;
+
+    @if abs(luminance($color) - $white_luminance) > $threshold {
+        color: $light-text;
+    } @else {
+        color: $dark-text;
     }
+
     &:hover:not(:disabled) {
-        background-color: lighten(saturate($color, 20%), 10%);
+        @if abs(luminance($color) - $white-luminance) > $threshold {
+            background-color: lighten($color, 10%);
+        } @else {
+            background-color: lighten($color, 10%);
+            filter: hue-rotate(-20deg);
+        }
     }
 }

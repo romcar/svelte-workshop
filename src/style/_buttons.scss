@@ -1,3 +1,55 @@
 .primary {
-    @include button-base($fern);
+    cursor: pointer;
+    @include button-base($color: $outer-space, $padding: $spacer $spacer-2);
+
+    &.success {
+        @include button-base($light-chrome-green, $padding: $spacer $spacer-2);
+    }
+
+    &.warning {
+        @include button-base($middle-yellow, $padding: $spacer $spacer-2);
+    }
+
+    &.error {
+        @include button-base($mahogany, $padding: $spacer $spacer-2);
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        @include button-base(lighten($outer-space, 40%), $padding: $spacer $spacer-2);
+
+        &:hover:not(:disabled) {
+            background-color: lighten($outer-space, 40%);
+            filter: none;
+        }
+    }
+}
+
+.secondary {
+    cursor: pointer;
+    @include button-base($jungle-green, $padding: $spacer $spacer-3);
+
+    &.success {
+        @include button-base($sea-green, $padding: $spacer $spacer-3);
+    }
+
+    &.warning {
+        @include button-base($canary, $padding: $spacer $spacer-3);
+    }
+
+    &.error {
+        @include button-base($razzmatazz, $padding: $spacer $spacer-3);
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        @include button-base(lighten($outer-space, 40%), $padding: $spacer $spacer-3);
+
+        &:hover:not(:disabled),
+        &:focus {
+            background-color: lighten($outer-space, 40%);
+            filter: none;
+            outline: none;
+        }
+    }
 }
