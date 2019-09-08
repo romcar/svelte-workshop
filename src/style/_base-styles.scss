@@ -1,0 +1,50 @@
+h1 {
+    font-size: $text-5;
+    margin-bottom: $spacer;
+    font-family: "Hepta Slab", Arial, Serif;
+}
+
+h2 {
+    font-size:$text-4;
+    margin-bottom: $spacer;
+    font-family: "Playfair Display", Arial, Serif;
+}
+
+h3 {
+    font-size: $text-1;
+    margin-bottom: $spacer;
+    font-family: "Hepta Slab", Arial, Serif;
+}
+
+h4 {
+    font-size: $text8;
+    font-family: "Playfair Display", Arial, Serif;
+}
+
+h5 {
+    font-size: $text1;
+    font-family: "Hepta Slab", Arial, Serif;
+}
+
+h6 {
+    font-size: $text;
+    font-family: "Playfair Display", Arial, Serif;
+    font-style: italic;
+}
+
+p {
+    font-size: $text;
+    line-height: 1.2rem;
+    margin-bottom: $spacer-4;
+    font-family: "Playfair Display", Arial, Serif;
+}
+
+img {
+    width: 100%;
+}
+
+textarea {
+    border-radius: $spacer-2;
+    padding: $spacer-2;
+    border: 1px solid $periwinkle;
+}

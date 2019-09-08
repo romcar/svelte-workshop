@@ -1,0 +1,9 @@
+@function luminance($color) {
+    $r: linearRgb(red($color)/255);
+    $g: linearRgb(green($color)/255);
+    $b: linearRgb(blue($color)/255);
+
+    @return 0.2126*$r + 0.7152*$g + 0.0722*$b;
+}
+
+$white_luminance: luminance($white);

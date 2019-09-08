@@ -1,11 +1,13 @@
-@import './mixins/index';
 @import './variables/index';
 @import './typography/index';
+@import './functions/index';
+@import './mixins/index';
+@import './base-styles';
+@import './buttons';
 
 main {
-    position: relative;
-    max-width: 56em;
-    background-color: white;
+    max-width: 1440px;
+    background-color: $white;
     padding: 2em;
     margin: 0 auto;
     box-sizing: border-box;
