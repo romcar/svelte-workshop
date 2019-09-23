@@ -1,0 +1,14 @@
+$alignments: (
+    "left": "flex-start",
+    "right": "flex-end",
+    "center": "center",
+    "stretch": "stretch"
+);
+
+@mixin align-content-to-the($alignment) {
+    justify-content: $alignment;
+}
+
+.center-this {
+
+}
