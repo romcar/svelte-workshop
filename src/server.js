@@ -1,6 +1,5 @@
 import sirv from 'sirv';
 import polka from 'polka';
-import send from '@polka/send';
 
 import compression from 'compression';
 import * as sapper from '@sapper/server';
