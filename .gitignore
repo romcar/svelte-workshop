@@ -6,6 +6,7 @@ bin-release/
 
 # Other files and folders
 .settings/
+.env
 
 # Executables
 *.swf
@@ -21,4 +22,3 @@ node_modules/
 .vscode/
 .vsCode/
 __sapper__/*
-.env
