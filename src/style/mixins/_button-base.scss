@@ -12,7 +12,8 @@
         color: $dark-text;
     }
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
         @if abs(luminance($color) - $white-luminance) > $threshold {
             background-color: lighten($color, 10%);
         } @else {

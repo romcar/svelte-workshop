@@ -8,12 +8,12 @@
 	@import '../style/index.scss';
 </style>
 
-<Nav class="main-nav" {segment}/>
+<Nav {segment}/>
 
-<main class="wrapper">
+<main class="container">
 	<slot></slot>
 </main>
 
-<footer class="main-footer">
+<footer class="main-footer o-row center-text u-margin-top--large">
 	Legs moving side to side - smack 'em smack 'em in the air.
 </footer>

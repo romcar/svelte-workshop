@@ -1,79 +1,71 @@
-.main-head {
-    grid-area: header;
-}
+.container {
+    @include container();
+    padding-left: $spacer;
+    padding-right: $spacer;
+    height: 100%;
 
-.content {
-    grid-area: content;
-}
-
-.main-nav {
-    grid-area: nav;
-}
-
-.side {
-    grid-area: sidebar;
-}
-
-.ad {
-    grid-area: ad;
-}
-
-.main-footer {
-    grid-area: footer;
-}
-
-.wrapper {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-areas:
-    "header"
-    "content"
-    "sidebar"
-    "ad"
-    "footer"
-}
-
-@media (min-width: 600px) {
-    .wrapper {
-        grid-template-columns: 1fr 3fr;
-        grid-template-areas:
-        "header header"
-        "sidebar content"
-        "ad footer";
-    }
-
-    nav ul {
-        display: flex;
-        justify-content: flex-start;
-        padding-left: $spacer-2;
+    @include breakpoint(extra-large) {
+        margin: auto;
     }
 }
 
-@media (min-width: 1000px) {
-    .wrapper {
-        grid-template-columns: 2fr 10fr;
-        grid-template-areas:
-        "header   header"
-        "sidebar content"
-        "        content"
-        "      ad       "
-        "footer  footer";
+.o-row {
+    @include span(24 of 24);
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
     }
+}
 
-    nav {
-        display: flex;
-        justify-content: flex-start;
-        padding-left: $spacer-2;
+.o-column {
+    float: left;
+    width: 100%;
+
+    &.o-row {
+        @include gutters(0);
     }
+}
 
-    // FOR THE PURPOSE OF KNOWING!
-    // I want the ad to span the full grid.
-    .ad {
-        grid-column: 1/12;
+// Creates the grid classes, breakpoints, and modifiers
+@each $key, $bp in $breakpoints  {
 
-        img {
-            max-height: 300px;
-            width: auto;
+    @if $key == extra-small {
+        @for $i from 1 through map-get($susy, columns) {
+
+            .o-#{$key}--#{$i} {
+                width: span($i);
+                padding-left: $spacer;
+                padding-right: $spacer;
+            }
+            .o-#{$key}--offset-#{$i} { @include pre($i);}
+            .btn-#{$key}--#{$i} {
+                width: (span($i) - 1 * 1%);
+                margin-right: $spacer-fourth;
+                margin-left: $spacer-fourth;
+            }
+        }
+    } @else {
+        @include breakpoint(#{$key}) {
+            @for $i from 1 through map-get($susy, columns) {
+
+                .o-#{$key}--#{$i} {
+                    width: span($i);
+                    padding-left: $spacer;
+                    padding-right: $spacer;
+                }
+                .o-#{$key}--offset-#{$i} { @include pre($i);}
+                .btn-#{$key}--#{$i} {
+                    width: (span($i) - 1 * 1%);
+                    margin-left: $spacer-fourth;
+                    margin-right: $spacer-fourth;
+                }
+            }
         }
     }
+}
+
+.flex-center {
+    @include flex-center();
 }

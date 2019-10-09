@@ -1,3 +1,29 @@
+@import "susy/sass/susy";
+
+$gutter-width: 20px;
+$column-width: 100px;
+
+$susy: (
+    flow: ltr,
+    math: fluid,
+    output: float,
+    columns: 24,
+    column-width: $column-width,
+    container: 1500px,
+    gutters: 0.1,
+    gutter-position: after,
+    global-box-sizing: border-box,
+    debug: (
+        image: show,
+        color: rgba(rgb(238, 178, 26), .25),
+        output: overlay,
+        toggle: top right,
+    ),
+);
+
+@include border-box-sizing;
+
+@import './css-reset';
 @import './variables/index';
 @import './typography/index';
 @import './functions/index';
@@ -5,11 +31,3 @@
 @import './base-styles';
 @import './layout';
 @import './buttons';
-
-main {
-    max-width: 1440px;
-    background-color: $white;
-    padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
-}

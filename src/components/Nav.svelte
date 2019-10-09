@@ -4,7 +4,7 @@
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
+		border-bottom: 1px solid rgba(255, 183, 0, 0.1);
 		font-weight: 300;
 		padding: 0 1em;
 	}
@@ -51,26 +51,26 @@
 <nav class="main-nav">
 	<ul>
 		<li>
-            <a class='{segment === undefined ? "selected" : ""}' href='.'>
-                home
-            </a>
-        </li>
-		<li>
-            <a class='{segment === "about" ? "selected" : ""}' href='about'>
-                about
+            <a rel=prefetch class='{segment === undefined ? "selected" : ""}' href='.'>
+                Home
             </a>
         </li>
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		    the blog data when we hover over the link or tap it on a touchscreen -->
+			the blog data when we hover over the link or tap it on a touchscreen -->
 		<li>
             <a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>
-                blog
+                Blog
             </a>
         </li>
 		<li>
             <a rel=prefetch class='{segment === "todo" ? "selected" : ""}' href='todo'>
-                todo
+                Todo
+            </a>
+        </li>
+		<li>
+            <a rel=prefetch class='{segment === "dancefloor" ? "selected" : ""}' href='dancefloor'>
+				Dance Floor
             </a>
         </li>
 	</ul>

@@ -1,24 +1,29 @@
+// NOTE Base button styles
+// This includes color, text luminace, border color,
+// and hover/focus states.
+
 .primary {
     cursor: pointer;
-    @include button-base($color: $outer-space, $padding: $spacer $spacer-2);
+    @include button-base($color: $outer-space, $padding: $spacer);
 
     &.success {
-        @include button-base($light-chrome-green, $padding: $spacer $spacer-2);
+        @include button-base($light-chrome-green, $padding: $spacer);
     }
 
     &.warning {
-        @include button-base($middle-yellow, $padding: $spacer $spacer-2);
+        @include button-base($middle-yellow, $padding: $spacer);
     }
 
     &.error {
-        @include button-base($mahogany, $padding: $spacer $spacer-2);
+        @include button-base($mahogany, $padding: $spacer);
     }
 
     &.disabled {
         cursor: not-allowed;
-        @include button-base(lighten($outer-space, 40%), $padding: $spacer $spacer-2);
+        @include button-base(lighten($outer-space, 40%), $padding: $spacer);
 
-        &:hover:not(:disabled) {
+        &:hover:not(:disabled),
+        &:focus:not(:disabled) {
             background-color: lighten($outer-space, 40%);
             filter: none;
         }
@@ -27,29 +32,34 @@
 
 .secondary {
     cursor: pointer;
-    @include button-base($jungle-green, $padding: $spacer $spacer-3);
+    @include button-base($jungle-green, $padding: $spacer);
 
     &.success {
-        @include button-base($sea-green, $padding: $spacer $spacer-3);
+        @include button-base($sea-green, $padding: $spacer);
     }
 
     &.warning {
-        @include button-base($canary, $padding: $spacer $spacer-3);
+        @include button-base($canary, $padding: $spacer);
     }
 
     &.error {
-        @include button-base($razzmatazz, $padding: $spacer $spacer-3);
+        @include button-base($razzmatazz, $padding: $spacer);
     }
 
     &.disabled {
         cursor: not-allowed;
-        @include button-base(lighten($outer-space, 40%), $padding: $spacer $spacer-3);
+        @include button-base(lighten($outer-space, 40%), $padding: $spacer);
 
         &:hover:not(:disabled),
-        &:focus {
+        &:focus:not(:disabled) {
             background-color: lighten($outer-space, 40%);
             filter: none;
             outline: none;
         }
     }
+}
+
+.primary,
+.secondary {
+    margin-bottom: $spacer;
 }

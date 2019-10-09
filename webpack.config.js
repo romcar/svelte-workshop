@@ -6,8 +6,11 @@ const sveltePreprocess = require('svelte-preprocess');
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 
-const alias = { svelte: path.resolve('node_modules', 'svelte') };
-const extensions = ['.mjs', '.js', '.json', '.svelte', '.html'];
+const alias = {
+	svelte: path.resolve('node_modules', 'svelte'),
+	susy: path.resolve('node_modules', 'susy')
+};
+const extensions = ['.mjs', '.js', '.json', '.svelte', '.html', '.scss'];
 const mainFields = ['svelte', 'module', 'browser', 'main'];
 
 const preprocess = sveltePreprocess({
@@ -32,6 +35,22 @@ module.exports = {
 							preprocess
 						}
 					}
+				},
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+					  // Creates `style` nodes from JS strings
+						'style-loader',
+						// Translates CSS into CommonJS
+						'css-loader',
+						// Compiles Sass to CSS
+						{
+							loader: "sass-loader",
+							options: {
+								includePaths: ["node_modules/susy"] // scoped-module-name exists here
+							}
+						},
+					],
 				}
 			]
 		},
@@ -66,6 +85,22 @@ module.exports = {
 							preprocess
 						}
 					}
+				},
+				{
+					test: /\.s[ac]ss$/i,
+					use: [
+						// Creates `style` nodes from JS strings
+						'style-loader',
+					  	// Translates CSS into CommonJS
+						'css-loader',
+					  	// Compiles Sass to CSS
+						{
+							loader: "sass-loader",
+							options: {
+								includePaths: ["node_modules/susy"] // scoped-module-name exists here
+							}
+						},
+					],
 				}
 			]
 		},
