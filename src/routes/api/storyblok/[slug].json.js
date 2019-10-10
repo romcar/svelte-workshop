@@ -1,4 +1,4 @@
-import { storyblok } from '../../store/index.js';
+import { storyblok } from '../../../store/index';
 
 export async function get(req, res) {
     const { slug } = req.params;

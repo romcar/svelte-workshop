@@ -1,8 +1,18 @@
+<script context="module">
+
+	export async function preload({ params, query }) {
+        return await this.fetch('/api/db/todos').then(r => r.json())
+        .then( todos => {
+            debugger;
+            return { todos }
+        });
+    }
+</script>
+
 <script>
     // SECTION TODO functionality (Store Example)
     import { todos, allTodosComplete } from '../../store/index';
     import { onMount } from 'svelte';
-
     let newTodo = '...yet';
 
     onMount(async () => {
@@ -56,7 +66,8 @@
 
     {#if !$allTodosComplete}
         {#each $todos as todo}
-            <div>{}</div>
+        {@debug $todos}
+            <div>{todo.item}</div>
         {/each}
     {/if}
 </div>
