@@ -1,35 +1,51 @@
-<script context="module">
-
-	export async function preload({ params, query }) {
-        return await this.fetch('/api/db/todos').then(r => r.json())
-        .then( todos => {
-            debugger;
-            return { todos }
-        });
-    }
-</script>
-
 <script>
     // SECTION TODO functionality (Store Example)
     import { todos, allTodosComplete } from '../../store/index';
     import { onMount } from 'svelte';
-    let newTodo = '...yet';
+
+    let newTodo = '';
+    let falseEntryAttempts = 0;
+
+    export function validateSubmission(todo) {
+        if(!todo) {
+            ++falseEntryAttempts;
+
+            if(falseEntryAttempts === 5) {
+                falseEntryAttempts = 0;
+                alert('Yo for real, gimme something to do!');
+            }
+            return false;
+        }
+        return true;
+    };
 
     onMount(async () => {
         // NOTE SSR part of the app does not know what the hell document is.
         const newTodo = document.querySelector('.add-todo-item')[0];
 
         let formFields = {
-            'todo-item': document.querySelectorAll('[name="todo-item"]')[0],
+            'new-todo-item': document.querySelectorAll('[name="new-todo-item"]')[0],
         }
+
+        newTodo.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(e.target.value) {
+                e.target.value = '';
+            }
+        });
 
         document.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const isValid = validateSubmission(formFields['new-todo-item'].value);
+
+            if(!isValid){
+                return false;
+            }
             // ANCHOR Store Update Example
             todos.update((t) => {
                 const todo = {
-                    'item': formFields['todo-item'].value,
+                    'item': formFields['new-todo-item'].value,
                     'completed': false,
                     'dateAdded': new Date()
                 };
@@ -39,35 +55,62 @@
                 // referenced $todo === 1.
                 return t.concat(todo);
             });
+
+            // ANCHOR POST example...
+            fetch('/api/db/todos', {
+                method: 'POST',
+                body: JSON.stringify($todos),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .catch((e) => console.error);
+
+            newTodo.value = ''
+            newTodo.placeholder = 'GIVE ME MOAR 🦁'
         });
     });
     // !SECTION
 </script>
 
+<script context="module">
+	export async function preload({ params, query }) {
+        // NOTE We can only use this.fetch inside of this preload function.
+        return await this.fetch('/api/db/todos', {
+            method: 'GET'
+        }).then(r => r.json())
+        .then( todoData => {
+            todos.set(todoData);
+        });
+    }
+</script>
 
-<style>
-
+<style lang="scss">
+.c-todo__text {
+    font-size: 1.5rem;
+}
 </style>
 
 <svelte:head>
-	<title> Todo </title>
+	<title> Todo List </title>
 </svelte:head>
 
-<div class="center-text">
-  {#if $allTodosComplete}
-    <h3 class="o-extra-small--24">Nothing to do...</h3>
-    <form class="add-todo-item" action="">
-      <input class="o-extra-small--24"
-             type="text"
-             name="todo-item"
-             bind:value={newTodo}/>
-    </form>
-  {/if}
+{#if $allTodosComplete}
+    <h3 class="o-extra-small--24 center-text">Nothing to do...</h3>
+{/if}
 
-    {#if !$allTodosComplete}
-        {#each $todos as todo}
-        {@debug $todos}
-            <div>{todo.item}</div>
-        {/each}
-    {/if}
-</div>
+{#if !$allTodosComplete}
+    {#each $todos as todo}
+        <div class="o-extra-small--24 center-text js-todo">
+            <p class="c-todo__text">{todo.item}</p>
+        </div>
+    {/each}
+{/if}
+
+<form class="add-todo-item" action="">
+    <input class="o-extra-small--24 center-text"
+        type="text"
+        name="new-todo-item"
+        bind:value={newTodo}
+        placeholder='Press enter to submit'/>
+</form>
