@@ -2,9 +2,17 @@
     // SECTION TODO functionality (Store Example)
     import { todos, allTodosComplete } from '../../store/index';
     import { onMount } from 'svelte';
+    import uuid from 'uuidv4';
 
     let newTodo = '';
     let falseEntryAttempts = 0;
+
+    export function toggleCompleted(todo) {
+        debugger;
+
+        const { id } = todo.dataset;
+        $todos[id].completed = !$todos[id].completed;
+    }
 
     export function validateSubmission(todo) {
         if(!todo) {
@@ -22,17 +30,24 @@
     onMount(async () => {
         // NOTE SSR part of the app does not know what the hell document is.
         const newTodo = document.querySelector('.add-todo-item')[0];
+        const todoElements = document.querySelectorAll('.c-todo__text');
 
         let formFields = {
             'new-todo-item': document.querySelectorAll('[name="new-todo-item"]')[0],
         }
 
-        newTodo.addEventListener('click', (e) => {
-            e.preventDefault();
-            if(e.target.value) {
-                e.target.value = '';
-            }
-        });
+        todoElements.forEach(todoElement => {
+            todoElement.addEventListener('click', (e) => {
+                e.preventDefault();
+                if(e.target.value) {
+                    e.target.value = '';
+                }
+
+                if(e.target.classList.contains('c-todo__text')) {
+                    toggleCompleted(e.target);
+                }
+            });
+        })
 
         document.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -47,13 +62,14 @@
                 const todo = {
                     'item': formFields['new-todo-item'].value,
                     'completed': false,
-                    'dateAdded': new Date()
+                    'dateAdded': new Date(),
+                    'id': uuid()
                 };
 
                 // NOTE Update function will use returned value.
                 // Given t = [], t.push(todo) --> 1 and later when
                 // referenced $todo === 1.
-                return t.concat(todo);
+                return Object.assign({}, t, { [todo.id]: todo })
             });
 
             // ANCHOR POST example...
@@ -64,7 +80,7 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .catch((e) => console.error);
+            .catch((err) => console.error(err));
 
             newTodo.value = ''
             newTodo.placeholder = 'GIVE ME MOAR 🦁'
@@ -89,6 +105,11 @@
 .c-todo__text {
     font-size: 1.5rem;
 }
+
+.completed {
+    font-size: 1.0rem;
+    color: red;
+}
 </style>
 
 <svelte:head>
@@ -100,9 +121,9 @@
 {/if}
 
 {#if !$allTodosComplete}
-    {#each $todos as todo}
+    {#each Object.keys($todos) as todo (todo)}
         <div class="o-extra-small--24 center-text js-todo">
-            <p class="c-todo__text">{todo.item}</p>
+            <p class="c-todo__text {$todos[todo].completed ? 'completed' : ''}" data-id={todo}>{$todos[todo].item}</p>
         </div>
     {/each}
 {/if}

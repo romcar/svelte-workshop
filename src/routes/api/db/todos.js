@@ -7,5 +7,11 @@ export async function get(req, res) {
 
 export async function post(req, res) {
     console.log('Inside Post');
-    res.end('success')
+
+    const updatedTodos = db.set('todos', req.body).write();
+    res.writeHead(201, {
+		'Content-Type': 'application/json'
+    });
+
+    res.end(JSON.stringify(updatedTodos));
 }
