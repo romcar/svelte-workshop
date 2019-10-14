@@ -4,6 +4,7 @@
     import { onMount } from 'svelte';
     import uuid from 'uuidv4';
     import { formatQS } from '../../js/urlUtils';
+    import { fly } from 'svelte/transition';
 
     onMount(async () => {
         // NOTE SSR part of the app does not know what the hell document is.
@@ -18,8 +19,10 @@
     let todoElements = [];
     let falseEntryAttempts = 0;
     let formFields = {};
+    let showCompleted = false;
 
     function getCompletedTodos() {
+        showCompleted = true;
         const params = {
             getCompleted: true
         }
@@ -142,8 +145,8 @@
 }
 
 .completed {
-    font-size: 1.1rem;
-    color: #ccc;
+    font-size: 1.3rem;
+    color: #c125;
 }
 
 .delete-completed {
@@ -179,11 +182,23 @@
         <div class="o-extra-small--24 center-text">
 
 
-                <p class="c-todo__text js-todo {$todos[todo].completed ? 'completed' : ''}"
-                    data-id={todo}
-                    on:click={() => { updateTodo(toggleCompleted(todo)); }}>
-                    {$todos[todo].item}
-                </p>
+                {#if !$todos[todo].completed }
+                    <p class="c-todo__text js-todo {$todos[todo].completed ? 'completed' : ''}"
+                        in:fly|local="{{x: 200, duration: 400}}"
+                        out:fly|local="{{x: -200, duration: 400}}"
+                        data-id={todo}
+                        on:click={() => { updateTodo(toggleCompleted(todo)); }}>
+                        {$todos[todo].item}
+                    </p>
+                {:else if showCompleted && $todos[todo].completed}
+                    <p class="c-todo__text js-todo completed"
+                        in:fly|local="{{x: 200, duration: 400}}"
+                        out:fly|local="{{x: -200, duration: 400}}"
+                        data-id={todo}
+                        on:click={() => { updateTodo(toggleCompleted(todo)); }}>
+                        {$todos[todo].item}
+                    </p>
+                {/if}
         </div>
     {/each}
 {/if}

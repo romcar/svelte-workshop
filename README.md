@@ -3,19 +3,37 @@
 The default [Sapper](https://github.com/sveltejs/sapper) template, with branches for Rollup and webpack. To clone it and get started:
 
 ```bash
-# for Rollup
-npx degit "sveltejs/sapper-template#rollup" my-app
-# for webpack
-npx degit "sveltejs/sapper-template#webpack" my-app
-cd my-app
+# https
+git clone https://github.com/romcar/svelte-workshop.git
+
+# SSH
+git clone git@github.com:romcar/svelte-workshop.git
+
+cd svelte-workshop
 npm install # or yarn!
 npm run dev
 ```
 
 Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
-Consult [sapper.svelte.dev](https://sapper.svelte.dev) for help getting started.
+Tech used:
+- ![Sapper](https://user-images.githubusercontent.com/31927972/66726984-626e7300-ee0a-11e9-82cf-b0a2d4c7b4f7.png)
+- ![Svelte](https://user-images.githubusercontent.com/31927972/66727024-a792a500-ee0a-11e9-9ef3-1e9411da639b.png)
+- ![lowDB](https://user-images.githubusercontent.com/31927972/66727056-d4df5300-ee0a-11e9-9413-28882a6466c2.png)
+- ![Sass](https://user-images.githubusercontent.com/31927972/66727155-4c14e700-ee0b-11e9-8095-c1b681bdd0c4.png)
+- ![Webpack](https://user-images.githubusercontent.com/31927972/66727110-15d76780-ee0b-11e9-902e-73af83066b9c.png)
+- ![StoryBlok](https://user-images.githubusercontent.com/31927972/66727175-6f3f9680-ee0b-11e9-87e3-3b936d2ffa07.png)
+- ![Susy](https://user-images.githubusercontent.com/31927972/66727227-bb8ad680-ee0b-11e9-8886-ec935893ec54.png)
 
+Documentations:
+-  [Sapper](https://sapper.svelte.dev/docs)
+-  [Svelte](https://svelte.dev/docs)
+-  [lowDB](https://github.com/typicode/lowdb)
+
+
+<br/>
+
+# Original ReadMe Notes:
 
 ## Structure
 

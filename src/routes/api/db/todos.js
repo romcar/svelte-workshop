@@ -21,7 +21,7 @@ export async function get(req, res) {
 
 export async function post(req, res) {
     const { body } = req;
-    console.log(`POST todos: ${body.id} received.`);
+    console.log(`POST todos:    ${body.id} received.`);
 
     db
     .update('todos', (todos) => {
@@ -39,7 +39,7 @@ export async function post(req, res) {
 
 export async function put(req, res) {
     const { body } = req;
-    console.log(`PUT todos: ${body.id} received.`);
+    console.log(`PUT todos:     ${body.id} received.`);
 
     db
     .update('todos', (todos) => {

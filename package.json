@@ -16,7 +16,6 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
-    "@polka/send-type": "^0.5.2",
     "compression": "^1.7.1",
     "css-loader": "^3.2.0",
     "dotenv": "^8.1.0",
@@ -28,7 +27,6 @@
     "sirv": "^0.4.0",
     "storyblok-js-client": "^2.0.3",
     "style-loader": "^1.0.0",
-    "svelte-transitions-fly": "^1.0.4",
     "uuidv4": "^5.0.1"
   },
   "devDependencies": {
