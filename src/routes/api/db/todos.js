@@ -2,16 +2,77 @@ import { db } from '../../../db.js';
 
 export async function get(req, res) {
     console.log('GET todos');
-    res.end(JSON.stringify(db.get('todos').value()));
+
+    const { getCompleted } = req.query;
+
+    const todos = db.get('todos')
+                    .filter(td => {
+                        return getCompleted ? td.completed : !td.completed;
+                    })
+                    .value();
+    const todosMap = {};
+
+    todos.forEach(todo => {
+        todosMap[todo.id] = todo;
+    });
+
+    res.end(JSON.stringify(todosMap));
 }
 
 export async function post(req, res) {
-    console.log('Inside Post');
+    const { body } = req;
+    console.log(`POST todos: ${body.id} received.`);
 
-    const updatedTodos = db.set('todos', req.body).write();
+    db
+    .update('todos', (todos) => {
+        todos[body.id] = body;
+        return todos;
+    })
+    .write();
+
     res.writeHead(201, {
-		'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
     });
 
-    res.end(JSON.stringify(updatedTodos));
+    res.end();
+}
+
+export async function put(req, res) {
+    const { body } = req;
+    console.log(`PUT todos: ${body.id} received.`);
+
+    db
+    .update('todos', (todos) => {
+        todos[body.id] = body;
+        return todos;
+    })
+    .write();
+    res.writeHead(202, {
+        'Content-Type': 'application/json'
+    });
+    res.end();
+}
+
+export async function del(req, res) {
+    console.log('DELETE todos');
+
+    const todos = db.get('todos')
+                    .value();
+
+    const uncompletedTodos = Object.keys(todos).reduce((uncomplete, todo) => {
+        if(!todos[todo].completed) {
+            uncomplete[todo] = todos[todo];
+            return uncomplete;
+        }
+        return uncomplete;
+    }, {});
+
+    db.set('todos', uncompletedTodos)
+        .write();
+
+    console.log(uncompletedTodos);
+    res.writeHead(202, {
+        'Content-Type': 'application/json'
+    });
+    res.end();
 }

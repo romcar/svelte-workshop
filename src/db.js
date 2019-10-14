@@ -6,6 +6,7 @@ export const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
 if(_.isEmpty(db.defaults().value())) {
-    db.defaults({ todos: [], dancers: {}, count: 0 })
+    db.defaults({ todos: {}, dancers: {}, count: 0 })
     .write();
+    console.debug('[DATABASE]  File Initialized');
 }

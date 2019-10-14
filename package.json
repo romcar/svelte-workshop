@@ -28,6 +28,7 @@
     "sirv": "^0.4.0",
     "storyblok-js-client": "^2.0.3",
     "style-loader": "^1.0.0",
+    "svelte-transitions-fly": "^1.0.4",
     "uuidv4": "^5.0.1"
   },
   "devDependencies": {

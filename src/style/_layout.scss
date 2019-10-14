@@ -1,7 +1,6 @@
 .container {
     @include container();
-    padding-left: $spacer;
-    padding-right: $spacer;
+    padding: $spacer-4 $spacer-2 $spacer-2 $spacer-2;
     height: 100%;
 
     @include breakpoint(extra-large) {
