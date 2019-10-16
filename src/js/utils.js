@@ -15,3 +15,7 @@ export function positionAbsoluteThenRevert(target) {
     });
     return true;
 }
+
+export function randomDancer(x) {
+    return Math.floor(Math.random() * x) ;
+}
