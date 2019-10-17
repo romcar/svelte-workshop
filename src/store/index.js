@@ -6,6 +6,12 @@ export const storyblok = new StoryblokClient({
 });
 
 export const todos = writable({});
+export const dancers = writable([]);
+
+export const dancerCount = derived(
+    dancers,
+    $dancers => $dancers.length
+);
 
 export const allTodosComplete = derived(
     todos,

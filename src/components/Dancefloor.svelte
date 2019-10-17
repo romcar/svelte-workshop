@@ -1,56 +1,63 @@
 <script>
-    import { onMount } from 'svelte';
-    import { Dancer } from '../components/js/Dancer';
-    import { randomDancer } from '../js/utils';
-    let dancers = [],
-        bounds = {},
-        linedup = false,
-        dancefloor,
-        dancerTypes;
+    import { onMount, onDestroy } from 'svelte';
+    import DefaultDancer from '../routes/dancefloor/_defaultDancer';
 
-    function pairOff() {
-        const partners = [
-            dancers[randomDancer(dancers.length)],
-            dancers[randomDancer(dancers.length)]
-        ];
-    }
+    import { dancers, dancerCount } from '../store/index';
+
+    let dancefloor,
+        x = 0,
+        y = 0;
 
     function lineUp() {
-        this.dancers.forEach()
+        x = 0;
+        y = 0;
+
+        $dancers.forEach(d => {
+            const isHidden = d.hasAttribute('hidden');
+
+            if(isHidden) {
+                d.removeAttribute('hidden');
+            };
+
+            d.style.top = `${y}px`;
+            d.style.left = `${x}px`;
+
+            if(x >= dancefloor.getBoundingClientRect().width) {
+                y += d.getBoundingClientRect().height + 1;
+                x = 0;
+            } else {
+                x += d.getBoundingClientRect().width + 1;
+            }
+
+            if(isHidden) {
+                d.setAttribute('hidden', true);
+            };
+        })
     }
 
-    function addDancer(e) {
-        const { height, width } = dancefloor.getBoundingClientRect();
-        const type = e.target.dataset.dancer;
-
-        let x = Math.random() * height;
-
-        if( x >= (height - 20)) {
-            x -= 20
+    function clear(e, skip = false) {
+        if(!skip) {
+            while (dancefloor.firstChild) {
+                dancefloor.removeChild(dancefloor.firstChild);
+            }
         }
 
-        let y = Math.random() * width;
-
-        if( y >= width - 20) {
-            y -= 20;
-        }
-
-        const newDancer = dancerTypes[type](x, y, 500);
-        dancers.push(newDancer);
-        newDancer.dance();
+        dancers.update(d => []);
+        x = 0;
+        y = 0;
     }
 
     onMount(async () => {
         dancefloor = document.querySelector('.dancefloor');
-        dancerTypes = {
-            'default': (x, y, step) => new Dancer('default', x, y, step, dancefloor)
-        }
     });
 
-
+    onDestroy(async () => {
+        clear({}, true);
+    });
 </script>
 
-<style>
+<style lang="scss" global>
+    @import './src/style/index.scss';
     .dancefloor {
         position: relative;
         border: 1px solid black;
@@ -58,6 +65,10 @@
         float: right;
     }
 
+    .count {
+        font-size: 3rem;
+        color: $outer-space;
+    }
     .dancefloor-actions {
         float: left;
     }
@@ -69,23 +80,23 @@
 
 <!-- markup (zero or more items) goes here -->
 <div class="dancefloor-actions o-extra-small--24 o-medium--4">
-<button type="button"
-    on:click={pairOff}>
-    Pair Off
-</button>
-<button type="button"
-    on:click={addDancer}
-    data-dancer="default">
-    Add Dancer
-</button>
-<button type="button"
-    on:click={lineUp} >
-    Line Up
-</button>
-<button type="button" on:click="" >
-    Clear
-</button>
 
+    <DefaultDancer {dancefloor} {dancers}/>
+    <button class="primary o-extra-small--12"
+        type="button"
+        on:click={lineUp} >
+        Line Up
+    </button>
+    <button class="secondary o-extra-small--12"
+        type="button"
+        on:click={clear} >
+        Clear
+    </button>
+
+    <div class="count o-row o-extra-small--24">
+        {$dancerCount}
+    </div>
 </div>
+
 <div class="dancefloor o-extra-small--24 o-medium--20">
 </div>

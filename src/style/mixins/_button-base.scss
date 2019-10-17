@@ -1,7 +1,8 @@
-@mixin button-base($color:none , $padding: none, $light-text:$white, $dark-text:$black, $threshold: 0.7) {
+@mixin button-base($color:none , $padding: none, $light-text:$white, $dark-text:$black, $threshold: 0.7, $float: left) {
     background-color: $color;
     border-color: darken($color, 10%);
     padding: $padding;
+    float: $float;
     /* luminance(#{$color}): #{luminance($color)}
      * luminance(white): #{luminance(white)}
      */

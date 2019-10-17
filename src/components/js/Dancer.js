@@ -1,17 +1,17 @@
 export class Dancer {
-    constructor({dancer, height, width, top, left, interval=0, dancefloor}) {
+    constructor(dancer, top, left, dancefloor, interval=0) {
         this.interval = Number(interval);
-        this.dancer = document.createElement(`span.${dancer}`);
+        this.dancer = document.createElement(`span`);
+        this.dancer.classList.add(`${dancer}-dancer`);
         this.dancefloor = dancefloor;
-        this.height = 20;
-        this.width = 20;
-        this.styleDancer();
+        this.top = top;
+        this.left = left;
 
-        return this.dancer;
+        return this;
     }
 
     dance() {
-        this.setPosition(top, left);
+        this.setPosition(this.top, this.left);
         this.step();
     }
 
@@ -25,12 +25,5 @@ export class Dancer {
         this.dancer.style.left = `${Math.floor(left)}px`;
 
         this.dancefloor.append(this.dancer);
-    }
-
-    styleDancer(options) {
-        this.dancer.style.backgroundColor = '#FF0000';
-        this.dancer.style.height = `${this.height}px`;
-        this.dancer.style.width = `${this.width}px`;
-        this.dancer.style.position = 'absolute';
     }
 }

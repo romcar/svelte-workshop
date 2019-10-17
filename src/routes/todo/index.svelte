@@ -138,7 +138,6 @@
 </script>
 
 <style lang="scss" global>
-
 @import './src/style/index.scss';
 .c-todo__text {
     font-size: 1.5rem;
@@ -183,7 +182,7 @@
 
 
                 {#if !$todos[todo].completed }
-                    <p class="c-todo__text js-todo {$todos[todo].completed ? 'completed' : ''}"
+                    <p class="c-todo__text js-todo completed={$todos[todo].completed}"
                         in:fly|local="{{x: 200, duration: 400}}"
                         out:fly|local="{{x: -200, duration: 400}}"
                         data-id={todo}
