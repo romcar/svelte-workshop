@@ -20,14 +20,14 @@
          * NOTE Do whatever you need to do to keep the
          * dancer inside the dancefloor here
          **/
-        if( x >= (height - 20)) {
-            x -= 20
+        if( x >= (height - 22)) {
+            x -= 22
         }
 
         let y = Math.random() * width;
 
-        if( y >= width - 20) {
-            y -= 20;
+        if( y >= width - 22) {
+            y -= 22;
         }
 
         const newDancer = new Dancer(
@@ -36,10 +36,6 @@
             dancefloor,
             (Math.random() * 500) + 200
         );
-
-        newDancer.setStep(() => {
-            newDancer.dancer.toggleAttribute('hidden')
-        });
 
         dancers.update( d => {
             d.push(newDancer.dancer);
@@ -58,24 +54,34 @@
 **/
 @import './src/style/index.scss';
 
-.default-dancer {
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(361deg);
+    }
+}
+
+.spinning-dancer {
     height: 20px;
     width: 20px;
-    background-color: $razzmatazz;
+    animation: spin 1s infinite;
+    background-color: $teal-blue;
     position: absolute;
     float: left;
 }
 
-.default-button {
-    @include button-base(rgba($razzmatazz, 0.75), $padding: $spacer);
+.spinning-button {
+    @include button-base(rgba($teal-blue, 0.75), $padding: $spacer);
 }
 </style>
 
 <!-- NOTE HTML Element binding example - pt 1 -->
-<button class="default-button o-extra-small--12"
+<button class="spinning-button o-extra-small--12"
     type="button"
     bind:this={dancer}
     on:click={addDancer}
-    data-dancer="default">
-    Blinky
+    data-dancer="spinning">
+    Spinning
 </button>

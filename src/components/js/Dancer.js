@@ -6,6 +6,7 @@ export class Dancer {
         this.dancefloor = dancefloor;
         this.top = top;
         this.left = left;
+        this.stepCB = () => {};
 
         return this;
     }
@@ -15,9 +16,13 @@ export class Dancer {
         this.step();
     }
 
+    setStep(cb) {
+        this.stepCB = cb;
+    }
+
     step() {
         setTimeout(this.step.bind(this), this.interval);
-        this.dancer.toggleAttribute('hidden');
+        this.stepCB();
     }
 
     setPosition(top, left) {
