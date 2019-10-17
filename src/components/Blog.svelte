@@ -24,7 +24,7 @@
     <h4>{subtitle}</h4>
     <br/>
 
-    <!-- NOTE Example of @html directive (Not recommended without escaped) -->
+    <!-- NOTE Example of @html directive (Not recommended without escape) -->
     <div class="md">
         {@html copy}
     </div>

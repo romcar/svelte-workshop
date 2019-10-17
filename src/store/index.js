@@ -1,3 +1,4 @@
+// SECTION Working with the store
 import { writable, derived } from 'svelte/store';
 const StoryblokClient = require('storyblok-js-client');
 
@@ -17,5 +18,5 @@ export const allTodosComplete = derived(
     todos,
     $todos => Object.keys($todos).length === 0
 );
-
+// !SECTION
 

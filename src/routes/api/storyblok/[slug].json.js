@@ -1,5 +1,6 @@
 import { storyblok } from '../../../store/index';
 
+// SECTION CMS get request example
 export async function get(req, res) {
     const { slug } = req.params;
 
@@ -12,3 +13,5 @@ export async function get(req, res) {
         res.end(JSON.stringify(cms.data.story.content));
     });
 }
+
+// !SECTION

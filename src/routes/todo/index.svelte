@@ -127,7 +127,7 @@
 <script context="module">
     export async function preload(page, session) {
 
-        // NOTE We can only use this.fetch inside of this preload function.
+        // ANCHOR  We can only use this.fetch inside of this preload function.
         return await this.fetch('/api/db/todos', {
             method: 'GET'
         }).then(r => r.json())
@@ -175,12 +175,12 @@
 {/if}
 
 {#if !$allTodosComplete}
-
+    <!-- ANCHOR Each loop example with key -->
     {#each Object.keys($todos) as todo (todo)}
 
         <div class="o-extra-small--24 center-text">
 
-
+                <!-- ANCHOR If conditional example -->
                 {#if !$todos[todo].completed }
                     <p class="c-todo__text js-todo completed={$todos[todo].completed}"
                         in:fly|local="{{x: 200, duration: 400}}"

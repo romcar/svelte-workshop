@@ -1,5 +1,6 @@
 import { db } from '../../../db.js';
 
+// SECTION Example of CRUD request
 export async function get(req, res) {
     console.log('GET todos');
 
@@ -53,6 +54,7 @@ export async function put(req, res) {
     res.end();
 }
 
+// ANCHOR Delete in JS is a reserved word, so we use del here.
 export async function del(req, res) {
     console.log('DELETE todos');
 
@@ -76,3 +78,6 @@ export async function del(req, res) {
     });
     res.end();
 }
+
+// !SECTION
+

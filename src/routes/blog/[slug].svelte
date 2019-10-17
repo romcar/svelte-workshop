@@ -18,7 +18,7 @@
 </script>
 
 <style>
-	/*
+	/* ANCHOR
 		By default, CSS is locally scoped to the component,
 		and any unused styles are dead-code-eliminated.
 		In this page, Svelte can't know which elements are
