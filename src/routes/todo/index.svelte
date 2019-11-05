@@ -52,7 +52,6 @@
         })
         .then(r => r.json())
         .then(completedTodos => {
-            debugger;
         })
         .catch(err => console.err(err));
     }
